@@ -1,0 +1,51 @@
+<%- include('partials/head') %>
+
+    <%- include('partials/nav') %>
+
+        <div class="container">
+            <div class="row mt-4">
+                <div class="col">
+                    <h1>Mes albums</h1>
+                    <a href="/create" class="btn btn-primary mt-2 mb-4">Nouvel album</a>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                <% datas.forEach(data=> { %>
+                    <div class="col">
+                        <div class="card">
+                            <a href="/album/<%=data._id%>">
+                            <div class="card-title text-center"><%= data.title%> (<%= data.images.length %>)</div>
+                            <% if (data.images[0]) { %>
+                                <div class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <% let flag = 0 %> 
+                                        <% data.images.forEach(image => { %>
+                                            <div class="carousel-item <% if(flag==0){%>
+                                                active
+                                                <% flag ++} %>">
+                                                <img src="/uploads/<%=data._id%>/<%=image%>" class="card-img-top img-fluid"
+                                                loading="lazy">
+                                            </div>
+                                        <% }) %>
+                                    </div>
+                                </div>
+                            <% } else { %>
+                                <img src="/uploads/default.jpg" class="card-img-top img-fluid"
+                                loading="lazy">
+                            <% } %>
+                            </a>
+                            <div class="card-body text-end">
+                                <a href="/erase/<%= data._id%>"
+                                    class="link-light badge bg-danger rounded-pill"
+                                >
+                                    Supprimer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+
+        </div>
+
+        <%- include('partials/script') %>

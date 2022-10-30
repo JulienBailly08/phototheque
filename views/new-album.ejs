@@ -1,0 +1,26 @@
+<%- include('partials/head') %>
+<%- include('partials/nav') %>
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h1>Nouvel album</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form action="/create" method="post">
+                <div class="form-group">
+                    <label for="albumTitle">Titre</label>
+                    <input class="form-control" type="text" name="albumTitle" id="albumTitle" placeholder="Titre souhaité">
+                </div>
+                <% if (error.length) { %>
+                    <div class="alert alert-danger mt-4 mb-2" role="alert"><%=error[0]%></div>
+                <% } %>
+                <button class="btn btn-primary mt-4" type="submit">Créer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/script') %>
